@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -eu
+
+if [ "${1:-}" == "install" ]; then
+   if [ ! -d "/target" ]; then
+      echo "Run with -v /usr/local/bin:/target to install run script"
+      exit 1
+   fi
+   install /usr/local/src/run.sh /target/docker-compose
+   exit 0
+fi
+
+exec /usr/local/bin/docker-compose "$@"
